@@ -24,6 +24,7 @@ shinyUI(
 
           tags$h3("Load data"),
           tags$hr(),
+        checkboxInput("demo_data","Use wg93 dataset ",value=TRUE),
           fileInput("file1", "Choose CSV or XLSX File",
                     accept = c(
                       "text/csv",

@@ -9,6 +9,9 @@ library(readxl)
 shinyServer(function(input, output,session) {
   
   data <- reactive({
+    if(input$demo_data==TRUE){
+      data=ca::wg93
+    }else{
     infile <- input$file1
 
     if (is.null(infile))
@@ -23,6 +26,7 @@ shinyServer(function(input, output,session) {
 
     index <- 1:ncol(data)
     data[ , index] <- lapply(data[ , index], as.factor)
+    }
     return(data)
 
   })
