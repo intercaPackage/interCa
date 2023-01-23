@@ -27,8 +27,10 @@ shinyServer(function(input, output,session) {
     if(input$data_option=="wg93 dataset"){
       data=ca::wg93
     }else if(input$data_option=="global enviroment"){
-     object_name=input$category
-      data=get(object_name)
+      name=input$category
+      data=eval(parse(text =name))
+     data=sapply(data,factor)
+      
     }else{
     infile <- input$file1
 

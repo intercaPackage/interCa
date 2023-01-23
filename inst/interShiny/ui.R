@@ -25,7 +25,7 @@ shinyUI(
 
           tags$h3("Load data"),
           tags$hr(),
-        radioButtons("data_option", "Data Source:", choices =c("global enviroment","wg93 dataset","upload your data") ,selected ="wg93 dataset"),
+        radioButtons("data_option", "Data Source:", choices =c("global enviroment","wg93 dataset","upload your data") ,selected ="global enviroment"),
         conditionalPanel(condition = "input.data_option == 'global enviroment'",
                          selectInput("category", "Select a dataset:", choices = NULL)
         ),        
