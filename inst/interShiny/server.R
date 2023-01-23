@@ -6,11 +6,29 @@ library(waiter)
 library(readr)
 library(readxl)
 
+
+
 shinyServer(function(input, output,session) {
+  choices<-reactive({
+    objects=ls(envir=.GlobalEnv)
+    is_dataframe <- sapply(objects, function(x) class(get(x)) == "data.frame")
+    is_dataframe
+    dataframes <- objects[is_dataframe]
+    dataframes
+    
+  })
+  
+  observeEvent(input$category, {
+    print(cat(input$category))
+       updateSelectInput(session, "category", choices = choices(),selected = input$category)
+  })
   
   data <- reactive({
-    if(input$demo_data==TRUE){
+    if(input$data_option=="wg93 dataset"){
       data=ca::wg93
+    }else if(input$data_option=="global enviroment"){
+     object_name=input$category
+      data=get(object_name)
     }else{
     infile <- input$file1
 
