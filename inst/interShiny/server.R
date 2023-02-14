@@ -5,23 +5,22 @@ library(shiny)
 library(waiter)
 library(readr)
 library(readxl)
-
-
+library(ggrepel)
+source('global.R')
 
 shinyServer(function(input, output,session) {
-  choices<-reactive({
-    objects=ls(envir=.GlobalEnv)
-    is_dataframe <- sapply(objects, function(x) class(get(x)) == "data.frame")
-    is_dataframe
-    dataframes <- objects[is_dataframe]
-    dataframes
-    
-  })
+  # #choices<-reactive({
+  #  # all_objects=ls()
+  #   input$data_option
+  # data.frames_only <- all_objects[sapply(mget(all_objects), class) == "data.frame"]
+  # data.frames_only=as.vector(data.frames_only)
+  # data.frames_only
+  # })
   
-  observeEvent(input$category, {
-    print(cat(input$category))
-       updateSelectInput(session, "category", choices = choices(),selected = input$category)
-  })
+ #  observeEvent(input$category, {
+ #    print(cat(input$category))
+ #       updateSelectInput(session, "category", choices = choices(),selected = NULL)
+ # })
   
   data <- reactive({
     if(input$data_option=="wg93 dataset"){
